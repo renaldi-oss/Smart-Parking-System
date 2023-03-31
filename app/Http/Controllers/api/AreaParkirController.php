@@ -15,7 +15,8 @@ class AreaParkirController extends Controller
     public function index()
     {
         //
-        return new AreaParkirResource(AreaParkir::all());
+        // return new AreaParkirResource(AreaParkir::all());
+        return "Hello World";
     }
 
     /**
@@ -39,8 +40,7 @@ class AreaParkirController extends Controller
      */
     public function update(Request $request, AreaParkir $areaparkir)
     {
-        //
-        
+        $areaparkir->update($request->all());      
     }
 
     /**

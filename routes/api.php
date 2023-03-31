@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::apiResource('/areaparkir', AreaParkirController::class);
-
+Route::middleware('auth:sanctum')->group(function () {
+    Route::apiResource('/areaparkir', AreaParkirController::class);
+});
 
