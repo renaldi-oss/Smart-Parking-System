@@ -28,9 +28,9 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
             return view('admin.component.accordion');
         })->name('accordion');
     });
-    // Route::get('/token', function () {
-    //     return auth()->user()->createToken('token-name')->plainTextToken; 
-    // })->name('token');
+    Route::get('/token', function () {
+        return auth()->user()->createToken('token-name')->plainTextToken; 
+    })->name('token');
 });
 
 
