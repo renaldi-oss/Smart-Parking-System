@@ -14,9 +14,8 @@ class AreaParkirController extends Controller
      */
     public function index()
     {
-        //
-        // return new AreaParkirResource(AreaParkir::all());
-        return "Hello World";
+        // return "Hello World";
+        return new AreaParkirResource(AreaParkir::all());
     }
 
     /**
@@ -40,7 +39,13 @@ class AreaParkirController extends Controller
      */
     public function update(Request $request, AreaParkir $areaparkir)
     {
-        $areaparkir->update($request->all());      
+        $request->validate([
+            'status' => 'required|boolean'
+        ]);
+        $areaparkir->update([
+            'status' => $request->status
+        ]);
+        return new AreaParkirResource($areaparkir);
     }
 
     /**
