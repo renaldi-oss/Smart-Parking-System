@@ -4059,10 +4059,12 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   forceTLS: true
 });
 window.Echo.channel('AreaParkir').listen('AreaParkirUpdated', function (e) {
-  var slot = document.querySelector(".parking-slot[data-id=\"".concat(e.kode, "\"]"));
-  e.status == 1 ? slot.classList.add('bg-success') : slot.classList.remove('bg-success');
-  e.status == 0 ? slot.classList.add('bg-danger') : slot.classList.remove('bg-danger');
-  console.log(slot.classList);
+  if (document.querySelector(".parking-slot[data-id=\"".concat(e.kode, "\"]"))) {
+    var slot = document.querySelector(".parking-slot[data-id=\"".concat(e.kode, "\"]"));
+    e.status == 1 ? slot.classList.add('bg-success') : slot.classList.remove('bg-success');
+    e.status == 0 ? slot.classList.add('bg-danger') : slot.classList.remove('bg-danger');
+    console.log(slot.classList);
+  }
 });
 
 /***/ }),

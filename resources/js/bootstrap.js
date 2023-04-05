@@ -29,10 +29,11 @@ window.Echo = new Echo({
 
 
 window.Echo.channel('AreaParkir').listen('AreaParkirUpdated', (e) => {
-    var slot = document.querySelector(`.parking-slot[data-id="${e.kode}"]`);
 
-    e.status == 1 ? slot.classList.add('bg-success') : slot.classList.remove('bg-success');
-    e.status == 0 ? slot.classList.add('bg-danger') : slot.classList.remove('bg-danger');
-    
-    console.log(slot.classList);
+    if(document.querySelector(`.parking-slot[data-id="${e.kode}"]`)){
+        var slot = document.querySelector(`.parking-slot[data-id="${e.kode}"]`);
+        e.status == 1 ? slot.classList.add('bg-success') : slot.classList.remove('bg-success');
+        e.status == 0 ? slot.classList.add('bg-danger') : slot.classList.remove('bg-danger');
+        console.log(slot.classList);
+    }
 });
