@@ -3,7 +3,7 @@
 namespace App\Http\Livewire\Dashboard;
 
 use Livewire\Component;
-
+use App\Models\AreaParkir;
 class Card extends Component
 {
 
@@ -11,42 +11,30 @@ class Card extends Component
 
     public function mount()
     {
-        $this->parkingData = [
-            ['id' => 1, 'name' => 'A1', 'status' => false],
-            ['id' => 2, 'name' => 'A2', 'status' => true],
-            ['id' => 3, 'name' => 'A3', 'status' => false],
-            ['id' => 4, 'name' => 'B1', 'status' => true],
-            ['id' => 5, 'name' => 'B2', 'status' => false],
-            ['id' => 6, 'name' => 'B3', 'status' => true],
-            ['id' => 7, 'name' => 'C1', 'status' => false],
-            ['id' => 8, 'name' => 'C2', 'status' => true],
-            ['id' => 9, 'name' => 'C3', 'status' => false],
-        ];
+        // $this->parkingData = [
+        //     ['id' => 1, 'name' => 'A1', 'status' => false],
+        //     ['id' => 2, 'name' => 'A2', 'status' => true],
+        //     ['id' => 3, 'name' => 'A3', 'status' => false],
+        //     ['id' => 4, 'name' => 'B1', 'status' => true],
+        //     ['id' => 5, 'name' => 'B2', 'status' => false],
+        //     ['id' => 6, 'name' => 'B3', 'status' => true],
+        //     ['id' => 7, 'name' => 'C1', 'status' => false],
+        //     ['id' => 8, 'name' => 'C2', 'status' => true],
+        //     ['id' => 9, 'name' => 'C3', 'status' => false],
+        // ];
+        // get parking data from database then convert to array
+        $this->parkingData = AreaParkir::get()->toArray();
     }
+    protected $listeners = ['areaparkir.updated' => 'refreshAreaParkir'];
 
-    public function toggleStatus($id)
+    public function refreshAreaParkir()
     {
-        foreach ($this->parkingData as $parking) {
-            if ($parking['id'] === $id) {
-                $parking['status'] = !$parking['status'];
-                break;
-            }
-        }
-        
-    }
-
-    public function poll()
-    {
-        $this->emit('refreshComponent');
-    }
-    public function getListeners()
-    {
-        return [
-            'echo:channel-name,ParkingStatusUpdate' => 'poll',
-        ];
+        dd('refresh');
     }
     public function render()
     {
+        // dd($this->parkingData);
         return view('livewire.dashboard.card');
     }
+    
 }

@@ -20,6 +20,8 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::apiResource('/areaparkir', AreaParkirController::class)->except(['create','store', 'destroy']);
+    Route::apiResource('/areaparkir', AreaParkirController::class)
+    ->parameters(['areaparkir' => 'areaparkir:kode'])    
+    ->except(['create','store', 'destroy']);
 });
 

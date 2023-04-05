@@ -5,17 +5,17 @@
     <div class="card-body">
         <div class="row">
             @foreach (array_chunk($parkingData, 3) as $row)
-                <div class="col-4">
+                <div class="container col-4">
                     @foreach ($row as $parking)
-                        <div class="text-center p-2 parking-slot {{ $parking['status'] ? 'bg-danger' : 'bg-success' }}" data-id="{{ $parking['id'] }}">
-                            {{ $parking['name'] }}
+                        <div class="text-center p-2 parking-slot {{ $parking['status'] ? 'bg-success': 'bg-danger'  }}" data-id="{{ $parking['id'] }}">
+                            {{ $parking['kode'] }}
                         </div>
                     @endforeach
                 </div>
             @endforeach
         </div>
         
-        <script>
+        {{-- <script>
             const parkingSlots = document.querySelectorAll('.parking-slot');
             
             parkingSlots.forEach((slot) => {
@@ -31,6 +31,6 @@
                     slot.classList.add(status ? 'bg-danger' : 'bg-success');
                 });
             });
-        </script>
+        </script> --}}
     </div>
 </div>

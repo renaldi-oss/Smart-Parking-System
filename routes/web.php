@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\AreaParkirUpdated;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
 Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
     Route::get('/dashboard', function () {
@@ -31,6 +32,12 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
     Route::get('/token', function () {
         return auth()->user()->createToken('token-name')->plainTextToken; 
     })->name('token');
+    // test event
+    Route::get('/event', function () {
+        
+        event(new AreaParkirUpdated('test'));
+        return 'event';
+    })->name('event');
 });
 
 
