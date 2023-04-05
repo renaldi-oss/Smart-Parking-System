@@ -34,9 +34,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
     })->name('token');
     // test event
     Route::get('/event', function () {
-        
         event(new AreaParkirUpdated('test'));
-        return 'event';
     })->name('event');
 });
 

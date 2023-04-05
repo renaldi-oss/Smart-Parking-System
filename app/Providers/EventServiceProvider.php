@@ -20,9 +20,6 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
-        AreaParkirUpdated::class => [
-            AreaParkirUpdatedListener::class,
-        ],
     ];
 
     /**
@@ -34,4 +31,5 @@ class EventServiceProvider extends ServiceProvider
     {
         //
     }
+
 }

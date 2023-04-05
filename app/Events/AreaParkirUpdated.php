@@ -10,18 +10,19 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class AreaParkirUpdated
+class AreaParkirUpdated implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $areaparkir;
+    public $kode,$status;
     /**
      * Create a new event instance.
      */
     public function __construct($areaparkir)
     {
         //
-        $this->areaparkir = $areaparkir;
+        $this->kode = $areaparkir->kode;
+        $this->status = $areaparkir->status;
     }
 
     /**
@@ -33,7 +34,7 @@ class AreaParkirUpdated
     {
         return [
             // new PrivateChannel('channel-name'),
-            new Channel('areaparkir'),
+            new Channel('AreaParkir'),
         ];
     }
 }

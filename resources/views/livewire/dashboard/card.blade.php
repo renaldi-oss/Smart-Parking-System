@@ -7,30 +7,26 @@
             @foreach (array_chunk($parkingData, 3) as $row)
                 <div class="container col-4">
                     @foreach ($row as $parking)
-                        <div class="text-center p-2 parking-slot {{ $parking['status'] ? 'bg-success': 'bg-danger'  }}" data-id="{{ $parking['id'] }}">
+                        <div 
+                        class="text-center p-2 parking-slot {{ $parking['status'] ? 'bg-success': 'bg-danger'  }}"
+                        data-id="{{ $parking['kode'] }}" 
+                        id="{{ $parking['kode'] }}"
+                        onclick="test('{{ $parking['kode'] }}')"
+                        >
                             {{ $parking['kode'] }}
                         </div>
                     @endforeach
                 </div>
             @endforeach
         </div>
-        
-        {{-- <script>
-            const parkingSlots = document.querySelectorAll('.parking-slot');
-            
-            parkingSlots.forEach((slot) => {
-                slot.addEventListener('click', () => {
-                    const id = slot.dataset.id;
-                    const status = !slot.classList.contains('bg-danger');
-                    
-                    // kirim request untuk memperbarui status di database melalui AJAX atau Livewire
-                    // ...
-                    
-                    // update tampilan
-                    slot.classList.remove('bg-success', 'bg-danger');
-                    slot.classList.add(status ? 'bg-danger' : 'bg-success');
-                });
-            });
-        </script> --}}
     </div>
+    <script>
+        function test(id) {
+            // get the element by data-id
+            console.log(id);
+            var element = document.querySelector('[data-id="' + id + '"]');
+            // console classlist
+            console.log(element.classList);
+        }
+    </script>
 </div>

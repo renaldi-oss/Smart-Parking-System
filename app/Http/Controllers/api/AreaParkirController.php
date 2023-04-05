@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\AreaParkirResource;
 use App\Models\AreaParkir;
 use Illuminate\Http\Request;
+use App\Events\AreaParkirUpdated;
+use Livewire\Livewire;
 
 class AreaParkirController extends Controller
 {
@@ -14,7 +16,10 @@ class AreaParkirController extends Controller
      */
     public function index()
     {
-        return new AreaParkirResource(AreaParkir::all());
+        // fire an global event
+        event(new AreaParkirUpdated('test'));
+        return 'ok';
+        // return new AreaParkirResource(AreaParkir::all());
     }
 
     /**
@@ -38,14 +43,19 @@ class AreaParkirController extends Controller
      */
     public function update(Request $request, AreaParkir $areaparkir)
     {
-        $request->validate([
-            'status' => 'required|boolean'
-        ]);
+        // $request->validate([
+        //     'status' => 'required|boolean'
+        // ]);
+        // $areaparkir->update([
+        //     'status' => $request->status
+        // ]);
+
+        // set status to !status
         $areaparkir->update([
-            'status' => $request->status
+            'status' => !$areaparkir->status
         ]);
 
-        event('areaparkir.updated', $areaparkir);
+        event(new AreaParkirUpdated($areaparkir));
 
         return new AreaParkirResource($areaparkir);
     }
