@@ -4,13 +4,17 @@ namespace App\Http\Livewire\Dashboard;
 
 use Livewire\Component;
 use App\Models\AreaParkir;
+
 class Card extends Component
 {
 
     public $parkingData;
+    public $data;
 
     public function mount()
     {
+        
+        $this->data = '';
         $this->parkingData = AreaParkir::get()->toArray();
     }
    
@@ -24,11 +28,11 @@ class Card extends Component
     //     $this->emit('refreshClassParkir', $data['kode']);
     // }
 
-
     public function render()
     {
         // dd($this->parkingData);
         return view('livewire.dashboard.card');
     }
+
     
 }

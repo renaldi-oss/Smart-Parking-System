@@ -10,17 +10,15 @@
         </div>
     </div>    
     {{-- <div class="card-body" id="areaParkir"> --}}
-    <div class="container-fluid" id="areaParkir">
+    {{-- <div class="container-fluid" id="areaParkir">
         <div class="row p-3">
             @foreach (array_chunk($parkingData, 3) as $row)
-                
                 <div class="container col-4">
                     @foreach ($row as $parking)
                         <div
                             class="text-center p-2 parking-slot {{ $parking['status'] ? 'bg-success': 'bg-danger'  }} {{ $loop->first ? 'rounded-top' : '' }} {{ $loop->last ? 'rounded-bottom' : '' }}"
                             data-id="{{ $parking['kode'] }}" 
                             id="{{ $parking['kode'] }}"
-                            onclick="test('{{ $parking['kode'] }}')"
                             >
                                 {{ $parking['kode'] }}
                         </div>
@@ -28,15 +26,38 @@
                 </div>
             @endforeach
         </div>
+        
+    </div> --}}
+    <div class="container-fluid" id="areaParkir">
+        <div class="row p-3">
+            <div class="container">
+                <div class="row g-4">
+                    @foreach (array_chunk($parkingData, 3) as $row)
+                        <div class="col-12">{{ 'Lantai ke ' . $loop->iteration }}</div>
+                        <div class="col-12">
+                            <div class="d-flex flex-wrap">
+                                @foreach ($row as $parking)
+                                    <div
+                                        class="flex-fill text-center p-2 parking-slot {{ $parking['status'] ? 'bg-success': 'bg-danger'  }} {{ $loop->first ? 'rounded-start' : '' }} {{ $loop->last ? 'rounded-end' : '' }} mx-2 my-2"
+                                        data-id="{{ $parking['kode'] }}" 
+                                        id="{{ $parking['kode'] }}"
+                                    >
+                                        {{ $parking['kode'] }}
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
     </div>
+    
+    
+    
+    
     <script>
-        function test(id) {
-            // get the element by data-id
-            console.log(id);
-            var element = document.querySelector('[data-id="' + id + '"]');
-            // console classlist
-            console.log(element.classList);
-        }
+        
         // create function fullscreen
         function fullscreen() {
             var element = document.getElementById("areaParkir");
@@ -61,7 +82,6 @@
                     element.remove();
                 }
             });
-            
         }
         
     </script>

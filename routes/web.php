@@ -1,8 +1,8 @@
 <?php
 
 use App\Events\AreaParkirUpdated;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -36,6 +36,9 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
     Route::get('/event', function () {
         event(new AreaParkirUpdated('test'));
     })->name('event');
+
+    
+        
 });
 
 
